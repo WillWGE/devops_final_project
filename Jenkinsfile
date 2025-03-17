@@ -17,7 +17,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://gitlab.com/hakimrizki/jenkins-demo.git', branch: 'master'
+                git url: 'https://github.com/WillWGE/devops_final_project.git', branch: 'master
             }
         }
 

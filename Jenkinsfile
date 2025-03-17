@@ -3,18 +3,16 @@ pipeline {
 
     environment {
         // Google Cloud project and credentials
-        GCP_PROJECT = 'xxx'
+        GCP_PROJECT = 'project-production'
         GCR_REGISTRY = "asia-southeast2-docker.pkg.dev/${GCP_PROJECT}"
         IMAGE_NAME = 'simple-app/nodejs-app'
         IMAGE_TAG = "${env.BUILD_ID}"
         FULL_IMAGE_NAME = "${GCR_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
 
-        GKE_CLUSTER_NAME = "xxx"
-        GKE_ZONE = "xxx"  // Set the GKE zone where your cluster is hosted
+        GKE_CLUSTER_NAME = "cluster-1"
+        GKE_ZONE = "asia-southeast2-b"  // Set the GKE zone where your cluster is hosted
 
-        // Discord Webhook URL (Replace with your actual webhook)
-        DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/xxx/xxx'
-    }
+        
 
     stages {
         stage('Checkout') {

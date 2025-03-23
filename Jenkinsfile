@@ -25,21 +25,24 @@ pipeline {
             }
         }
 
-        stage('Login to dockerHub') {
+        stage('Push Docker Image') {
             steps {
                 script {
-                    sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"    
+                    sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+                    sh "docker push ${DOCKER_IMAGE}"    
             }
         }
     }
 
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    sh "docker push ${DOCKER_IMAGE}"
-                }
-            }
-        }
+        // stage('Push Docker Image') {
+        //     steps {
+        //         script {
+        //             withDockerRegistry([ credentialsId: "DOCKERHUB_CREDENTIALS", url: "" ]){
+        //             sh "docker push ${DOCKER_IMAGE}"
+        //             }
+        //         }
+        //     }
+        // }
 
     //     stage('Get KubeConfig') {
     //         steps {

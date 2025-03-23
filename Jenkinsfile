@@ -53,7 +53,9 @@ pipeline {
                             # Verify authentication
                             gcloud auth list
 
-                            #check gcloud version
+                            export PATH=$HOME/google-cloud-sdk/bin:$PATH
+                            echo "New PATH: $PATH"
+                            which gcloud || echo "gcloud not found"
                             gcloud --version || echo "gcloud command failed"
 
                             # get kubernetes configuration

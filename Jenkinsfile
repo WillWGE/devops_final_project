@@ -5,7 +5,6 @@ pipeline {
         // Google Cloud project and credentials
         GCP_PROJECT = 'project-production'
         DOCKER_IMAGE= 'devops-final/nodejs-app:latest'
-        DOCKERHUB_CREDENTIALS=credentials('dockerhubpwd')
         GKE_CLUSTER_NAME = "cluster-1"
         GKE_ZONE = "asia-southeast2-b"  // Set the GKE zone where your cluster is hosted
     }
@@ -36,7 +35,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    withDockerRegistry([ credentialsId: "DOCKERHUB_CREDENTIALS", url: "" ]){
+                    withDockerRegistry([ credentialsId: "dockerhubpwd", url: "" ]){
                     sh "docker push ${DOCKER_IMAGE}"
                     }
                 }

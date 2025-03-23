@@ -59,13 +59,35 @@ pipeline {
                             # get kubernetes configuration
                             gcloud container clusters get-credentials cluster-1 --zone asia-southeast2-b --project project-production-449715
 
+                            #install kubectl
+                            gcloud components install kubectl
+
                         '''
                     }
                 }
             }
         }
-    }
 
+        stage('Set KubeContext') {
+            steps {
+                script {
+                    sh """
+                        kubectl config use-context gke_${GCP_PROJECT}_${GKE_ZONE}_${GKE_CLUSTER_NAME}
+                    """
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes Cluster'){
+            steps{
+                script{
+                    '''
+                        kubectl set image deployment/nodejs-app app=${DOCKER_IMAGE} --namespace=default
+                    '''
+                }
+            }
+        }
+    }
 }
 
     // post {

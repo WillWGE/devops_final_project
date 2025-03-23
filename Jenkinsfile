@@ -48,7 +48,7 @@ pipeline {
                             gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
                             
                             # Set the project
-                            gcloud config set project $project-production-449715
+                            gcloud config set project project-production-449715
                             
                             # Verify authentication
                             gcloud auth list

@@ -62,12 +62,6 @@ pipeline {
                             #install sdk
                             ./google-cloud-sdk/install.sh
 
-                            #install gke-gcloud-auth-plugin
-                            gcloud components install gke-gcloud-auth-plugin 
-
-                            #install kubectl
-                            gcloud components install kubectl
-
                             # get kubernetes configuration
                             gcloud container clusters get-credentials cluster-1 --zone asia-southeast2-b --project project-production-449715
 

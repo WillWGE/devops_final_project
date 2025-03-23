@@ -53,24 +53,17 @@ pipeline {
                             # Verify authentication
                             gcloud auth list
 
+                            #check gcloud version
                             gcloud --version || echo "gcloud command failed"
+
+                            # get kubernetes configuration
+                            gcloud container clusters get-credentials cluster-1 --zone asia-southeast2-b --project project-production-449715
+
                         '''
                     }
                 }
             }
         }
-        
-        // stage('Get Kubernetes Configuration') {
-        //     steps {
-        //         script {
-        //             sh 
-        //             '''
-        //                  gcloud --version || echo "gcloud command failed"
-        //                  gcloud container clusters get-credentials cluster-1 --zone asia-southeast2-b --project project-production-449715
-        //             '''
-        //         }
-        //     }
-        // }
     }
 
 }

@@ -30,16 +30,15 @@ pipeline {
             steps {
                     sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
         }
-    }
+         }
 
         stage('Push Docker Image') {
             steps {
                     sh "docker push $DOCKER_IMAGE:$IMAGE_TAG"
              }
             }
-        }
         
-        stage('Get KubeConfig') {
+        stage('Get Kubernetes Configuration') {
             steps {
                 script {
                     sh '''
@@ -52,7 +51,8 @@ pipeline {
                 }
             }
         }
-
+    }
+}
 
     // post {
     //     always {
@@ -71,4 +71,3 @@ pipeline {
     //         }
     //     }
 
-}

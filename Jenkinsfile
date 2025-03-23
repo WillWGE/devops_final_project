@@ -53,14 +53,14 @@ pipeline {
                             # Verify authentication
                             gcloud auth list
 
-                            // #download the Linux archive file
-                            // curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
+                            #download the Linux archive file
+                            curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
 
-                            // #extract content
-                            // tar -xf google-cloud-cli-linux-x86_64.tar.gz
+                            #extract content
+                            tar -xf google-cloud-cli-linux-x86_64.tar.gz
 
-                            // #install sdk
-                            // ./google-cloud-sdk/install.sh
+                            #install sdk
+                            ./google-cloud-sdk/install.sh
 
                             #install gke-gcloud-auth-plugin
                             gcloud components install gke-gcloud-auth-plugin 

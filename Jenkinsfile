@@ -60,7 +60,9 @@ pipeline {
                             gcloud container clusters get-credentials cluster-1 --zone asia-southeast2-b --project project-production-449715
 
                             #install gke-gcloud-auth-plugin
+                            gcloud components install gke-gcloud-auth-plugin || true
                             #install kubectl
+                            gcloud components install kubectl
                 
 
                         '''

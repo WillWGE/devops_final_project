@@ -39,54 +39,27 @@ pipeline {
             }
         }
 
-    //     stage('Get KubeConfig') {
-    //         steps {
-    //             script {
-    //                 sh '''
-    //                     export PATH=$HOME/google-cloud-sdk/bin:$PATH
-    //                     echo "New PATH: $PATH"
-    //                     which gcloud || echo "gcloud not found"
-    //                     gcloud --version || echo "gcloud command failed"
-    //                     gcloud container clusters get-credentials aiflow-cluster --zone asia-southeast2-a --project inspiring-being-284903
-    //                 '''
-    //             }
-    //         }
-    //     }
+        stage('Push Docker Image') {
+            steps {
+                    sh "docker push $DOCKER_IMAGE:$IMAGE_TAG"
+             }
+            }
+        }
+        
+        stage('Get KubeConfig') {
+            steps {
+                script {
+                    sh '''
+                        export PATH=$HOME/google-cloud-sdk/bin:$PATH
+                        echo "New PATH: $PATH"
+                        which gcloud || echo "gcloud not found"
+                        gcloud --version || echo "gcloud command failed"
+                        gcloud container clusters get-credentials cluster-1 --zone asia-southeast2-b --project project-production-449715
+                    '''
+                }
+            }
+        }
 
-    //     stage('Set KubeContext') {
-    //         steps {
-    //             script {
-    //                 sh """
-    //                     kubectl config use-context gke_${GCP_PROJECT}_${GKE_ZONE}_${GKE_CLUSTER_NAME}
-    //                 """
-    //             }
-    //         }
-    //     }
-
-    //     stage('Deploy with New Image') {
-    //         steps {
-    //             script {
-    //                 def exitCode = sh(
-    //                     script: '''
-    //                     export PATH=$HOME/google-cloud-sdk/bin:$PATH
-    //                     echo "New PATH: $PATH"
-    //                     which gcloud || echo "gcloud not found"
-    //                     gcloud --version || echo "gcloud command failed"
-                        
-    //                     gcloud components install gke-gcloud-auth-plugin || true
-
-    //                     kubectl set image deployment/nodejs-app app=${FULL_IMAGE_NAME} migrate=${FULL_IMAGE_NAME}
-    //                     ''',
-    //                     returnStatus: true
-    //                 )
-
-    //                 if (exitCode != 0){
-    //                     error("Deployment failed with exit code: ${exitCode}")
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
 
     // post {
     //     always {
@@ -104,5 +77,4 @@ pipeline {
     //             sendDiscordNotification(message)
     //         }
     //     }
-    }
 

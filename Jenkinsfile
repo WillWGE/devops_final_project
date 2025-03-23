@@ -5,7 +5,7 @@ pipeline {
         // Google Cloud project and credentials
         GCP_PROJECT = 'project-production'
         DOCKER_IMAGE= 'devops-final/nodejs-app'
-        // DOCKER_CREDENTIALS=
+        DOCKERHUB_CREDENTIALS=credentials('dockerhubpwd')
         GKE_CLUSTER_NAME = "cluster-1"
         GKE_ZONE = "asia-southeast2-b"  // Set the GKE zone where your cluster is hosted
     }
@@ -25,18 +25,13 @@ pipeline {
             }
         }
 
-        stage('Push Image to DockerHub') {
+        stage('Login to dockerHub') {
             steps {
                 script {
-                       
-                    withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
-                        // some block
-                        sh "echo $dockerhubpwd | docker login -u williamwg --password-stdin"  
-                    }
-                        
-                }
+                    sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"    
             }
         }
+    }
 
         stage('Push Docker Image') {
             steps {

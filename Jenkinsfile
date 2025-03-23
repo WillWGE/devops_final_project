@@ -31,9 +31,17 @@ pipeline {
                        
                     withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
                         // some block
-                        sh 'docker login -u williamwg-p ${dockerhubpwd}'  
+                        sh "echo $dockerhubpwd | docker login -u williamwg --password-stdin"  
                     }
-                        sh "docker push ${DOCKER_IMAGE}"
+                        
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    sh "docker push ${DOCKER_IMAGE}"
                 }
             }
         }

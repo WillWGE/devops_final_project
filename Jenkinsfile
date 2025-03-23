@@ -53,14 +53,11 @@ pipeline {
                             # Verify authentication
                             gcloud auth list
 
-                            #download the Linux archive file
-                            curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
-
-                            #extract content
-                            tar -xf google-cloud-cli-linux-x86_64.tar.gz
-
-                            #install sdk
-                            ./google-cloud-sdk/install.sh
+                            
+                            export PATH=$HOME/google-cloud-sdk/bin:$PATH
+                            echo "New PATH: $PATH"
+                            which gcloud || echo "gcloud not found"
+                            gcloud --version || echo "gcloud command failed"
 
                             # get kubernetes configuration
                             gcloud container clusters get-credentials cluster-1 --zone asia-southeast2-b --project project-production-449715

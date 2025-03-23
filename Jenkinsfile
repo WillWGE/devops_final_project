@@ -25,13 +25,18 @@ pipeline {
             }
         }
 
-    //     stage('Push to DockerHub') {
-    //         steps {
-    //             script {
-    //                 sh "docker push ${FULL_IMAGE_NAME}"
-    //             }
-    //         }
-    //     }
+        stage('Push Image to DockerHub') {
+            steps {
+                script {
+                       
+                    withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
+                        // some block
+                        sh 'docker login -u williamwg-p ${dockerhubpwd}'  
+                    }
+                        sh "docker push ${DOCKER_IMAGE}"
+                }
+            }
+        }
 
     //     stage('Get KubeConfig') {
     //         steps {

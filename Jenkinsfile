@@ -4,9 +4,11 @@ pipeline {
     environment {
         // Google Cloud project and credentials
         GCP_PROJECT = 'project-production'
-        DOCKER_IMAGE= 'devops-final/nodejs-app:latest'
+        DOCKER_IMAGE= 'williamwg/nodejs-app'
+        IMAGE_TAG='latest'
         GKE_CLUSTER_NAME = "cluster-1"
         GKE_ZONE = "asia-southeast2-b"  // Set the GKE zone where your cluster is hosted
+        DOCKERHUB_CREDENTIALS=credentials('dockerhubpwd')
     }
 
     stages {
@@ -19,7 +21,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker build -t ${DOCKER_IMAGE} ."
+                    sh "docker build -t $DOCKER_IMAGE:$IMAGE_TAG ."
                 }
             }
         }
@@ -27,18 +29,16 @@ pipeline {
         stage('Log in DockerHub') {
             steps {
                 script {
-                    sh "echo ${dockerhubpwd} | docker login -u williamwg --password-stdin"
+                    sh "echo $DOCKER_HUB_CREDENTIALS_PSW | docker login -u $DOCKER_HUB_CREDENTIALS_USR --password-stdin"
             }
         }
     }
 
         stage('Push Docker Image') {
             steps {
-                script {
-                    withDockerRegistry([ credentialsId: "dockerhubpwd", url: "" ]){
-                    sh "docker push ${DOCKER_IMAGE}"
+                
+                    sh "docker push $DOCKER_IMAGE:$IMAGE_TAG"
                     }
-                }
             }
         }
 

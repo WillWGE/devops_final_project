@@ -5,7 +5,7 @@ pipeline {
         // Google Cloud project and credentials
         GCP_PROJECT = 'project-production'
         DOCKER_IMAGE= 'williamwg/nodejs-app'
-        IMAGE_TAG='latest'
+        IMAGE_TAG = "latest"
         GKE_CLUSTER_NAME = "cluster-1"
         GKE_ZONE = "asia-southeast2-b"  // Set the GKE zone where your cluster is hosted
         DOCKERHUB_CREDENTIALS=credentials('dockerhubpwd')
@@ -37,21 +37,39 @@ pipeline {
                     sh "docker push $DOCKER_IMAGE:$IMAGE_TAG"
              }
             }
+
+        stage('Authenticate with GCP') {
+            steps {
+                script {
+                    // Use the service account stored in Jenkins credentials
+                    withCredentials([file(credentialsId: 'service_account', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+                        sh '''
+                            # Authenticate with GCP using the service account
+                            gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+                            
+                            # Set the project
+                            gcloud config set project $project-production-449715
+                            
+                            # Verify authentication
+                            gcloud auth list
+                        '''
+                    }
+                }
+            }
+        }
         
         stage('Get Kubernetes Configuration') {
             steps {
                 script {
-                    sh '''
-                        export PATH=$HOME/google-cloud-sdk/bin:$PATH
-                        echo "New PATH: $PATH"
-                        which gcloud || echo "gcloud not found"
-                        gcloud --version || echo "gcloud command failed"
-                        gcloud container clusters get-credentials cluster-1 --zone asia-southeast2-b --project project-production-449715
+                    sh 
+                    '''
+                         gcloud container clusters get-credentials cluster-1 --zone asia-southeast2-b --project project-production-449715
                     '''
                 }
             }
         }
     }
+
 }
 
     // post {

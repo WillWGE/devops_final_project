@@ -66,16 +66,6 @@ pipeline {
             }
         }
 
-        // stage('Set KubeContext') {
-        //     steps {
-        //         script {
-        //             sh """
-        //                 kubectl config use-context gke_${GCP_PROJECT}_${GKE_ZONE}_${GKE_CLUSTER_NAME}
-        //             """
-        //         }
-        //     }
-        // }
-
         stage('Deploy to Kubernetes Cluster'){
             steps{
                 script{
@@ -97,20 +87,4 @@ pipeline {
     }
 }
 
-    // post {
-    //     always {
-    //         sh "docker rmi ${FULL_IMAGE_NAME} || true"
-    //     }
-    //     success {
-    //         script {
-    //             def message = "✅ **Deployment Successful**: ${currentBuild.fullDisplayName} has been deployed! 🎉"
-    //             sendDiscordNotification(message)
-    //         }
-    //     }
-    //     failure {
-    //         script {
-    //             def message = "❌ **Deployment Failed**: ${currentBuild.fullDisplayName} encountered an error. ⚠️"
-    //             sendDiscordNotification(message)
-    //         }
-    //     }
-
+   

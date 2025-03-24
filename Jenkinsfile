@@ -15,7 +15,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/WillWGE/devops_final_project']])
-                git url: 'https://gitlab.com/WillWGE/devops_final_project.git', branch: 'main'
+                git url: 'https://github.com/WillWGE/devops_final_project.git', branch: 'main'
             }
         }
 

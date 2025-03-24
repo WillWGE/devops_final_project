@@ -14,7 +14,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/WillWGE/devops_final_project']])
+                // checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/WillWGE/devops_final_project']])
+                git url: 'https://gitlab.com/WillWGE/devops_final_project.git', branch: 'main'
             }
         }
 
@@ -52,6 +53,8 @@ pipeline {
                             
                             # Verify authentication
                             gcloud auth list
+
+                            gcloud config set project project-production-449715
 
                             # get kubernetes configuration
                             gcloud container clusters get-credentials cluster-1 --zone asia-southeast2-b --project project-production-449715

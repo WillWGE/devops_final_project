@@ -44,11 +44,6 @@ pipeline {
                     // Use the service account stored in Jenkins credentials
                     withCredentials([file(credentialsId: 'service_account', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
                         sh '''
-                            export PATH=$HOME/google-cloud-sdk/bin:$PATH
-                            echo "New PATH: $PATH"
-                            which gcloud || echo "gcloud not found"
-                            gcloud --version || echo "gcloud command failed"
-
                             # Authenticate with GCP using the service account
                             gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
                             
@@ -57,7 +52,7 @@ pipeline {
                             
                             # Verify authentication
                             gcloud auth list
-                            
+
                             # get kubernetes configuration
                             gcloud container clusters get-credentials cluster-1 --zone asia-southeast2-b --project project-production-449715
 

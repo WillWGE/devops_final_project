@@ -53,8 +53,11 @@ pipeline {
                             # Verify authentication
                             gcloud auth list
 
+                            gcloud components install gke-gcloud-auth-plugin
                             # get kubernetes configuration
                             gcloud container clusters get-credentials cluster-1 --zone asia-southeast2-b --project project-production-449715
+
+                            
 
                         '''
                     }

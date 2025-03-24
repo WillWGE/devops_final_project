@@ -81,7 +81,7 @@ pipeline {
                     //     kubectl set image deployment/nodejs-app app='williamwg/nodejs-app:latest' --namespace=default
                     // '''
                     // Check if deployment exists
-                    def deploymentExists = sh(script: "kubectl get deployment \$deployment.yaml --ignore-not-found", returnStatus: true) == 0
+                    def deploymentExists = sh(script: "kubectl get deployment nodejs-app --ignore-not-found", returnStatus: true) == 0
                     
                     if (!deploymentExists) {
                         echo "Deployment does not exist. Applying deployment manifest..."

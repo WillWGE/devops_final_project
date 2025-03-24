@@ -63,15 +63,15 @@ pipeline {
             }
         }
 
-        stage('Set KubeContext') {
-            steps {
-                script {
-                    sh """
-                        kubectl config use-context gke_${GCP_PROJECT}_${GKE_ZONE}_${GKE_CLUSTER_NAME}
-                    """
-                }
-            }
-        }
+        // stage('Set KubeContext') {
+        //     steps {
+        //         script {
+        //             sh """
+        //                 kubectl config use-context gke_${GCP_PROJECT}_${GKE_ZONE}_${GKE_CLUSTER_NAME}
+        //             """
+        //         }
+        //     }
+        // }
 
         stage('Deploy to Kubernetes Cluster'){
             steps{

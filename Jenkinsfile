@@ -79,19 +79,14 @@ pipeline {
                     // '''
                     //     kubectl apply -f k8s/deployment.yaml
                     //     kubectl set image deployment/nodejs-app app='williamwg/nodejs-app:latest' --namespace=default
+                    // kubectl set image deployment/nodejs-app app='williamwg/nodejs-app:latest' --namespace=default
                     // '''
                     // Check if deployment exists
-                    def deploymentExists = sh(script: "kubectl get deployment nodejs-app --ignore-not-found", returnStatus: true) == 0
-                    
-                    if (!deploymentExists) {
-                        echo "Deployment does not exist. Applying deployment manifest..."
-                        sh "kubectl apply -f k8s/deployment.yaml"
-                    }
-
                     // Update the image in deployment
                     sh """
-                        kubectl set image deployment/nodejs-app app='williamwg/nodejs-app:latest' --namespace=default
-                        kubectl rollout status deployment/\$deployment.yaml
+                        kubectl apply -f k8s/deployment.yaml
+                        
+                        kubectl rollout status deployment/nodejs-app --namespace=default
                     """
                 }
             }

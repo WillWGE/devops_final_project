@@ -56,7 +56,6 @@ pipeline {
                             # get kubernetes configuration
                             gcloud container clusters get-credentials cluster-1 --zone asia-southeast2-b --project project-production-449715
 
-                            
 
                         '''
                     }

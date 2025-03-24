@@ -77,7 +77,7 @@ pipeline {
             steps{
                 script{
                     '''
-                        kubectl set image deployment/nodejs-app app=${DOCKER_IMAGE} --namespace=default
+                        kubectl set image deployment/nodejs-app app='williamwg/nodejs-app:latest' --namespace=default
                     '''
                 }
             }

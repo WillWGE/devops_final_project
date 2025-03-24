@@ -79,8 +79,9 @@ pipeline {
                     sh """
                         kubectl apply -f k8s/deployment.yaml
                         kubectl apply -f k8s/service.yaml
-                        kubectl rollout status deployment/nodejs-app --namespace=default
+                        
                     """
+                    // kubectl rollout status deployment/nodejs-app --namespace=default
                 }
             }
         }

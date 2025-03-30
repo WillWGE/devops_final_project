@@ -18,7 +18,7 @@ RUN npm install -g sequelize-cli
 COPY . /usr/src/app
 
 # Expose the port that the application will run on
-EXPOSE 8000
+EXPOSE 8080
 
 # Define the command to run the application
 CMD ["npm", "start"]

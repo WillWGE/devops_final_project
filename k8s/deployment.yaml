@@ -16,4 +16,4 @@ spec:
       - name: nodejs-app
         image: williamwg/nodejs-app:latest  # Replace with your Docker Hub image
         ports:
-        - containerPort: 8080
+        - containerPort: 3000

@@ -1,25 +1,17 @@
 {
   "name": "devops-final",
   "version": "1.0.0",
-  "private": true,
+  "description": "A simple JavaScript application",
+  "main": "app.js",
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "start": "node app.js"
   },
-  "dependencies": {
-    "express": "^4.18.2",
-    "dotenv": "^16.0.3",
-    "morgan": "^1.10.0",
-    "cookie-parser": "^1.4.6",
-    "pg": "^8.11.3",
-    "pg-hstore": "^2.3.4",
-    "sequelize": "^6.32.1",
-    "debug": "^4.3.4"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.1"
-  }
+  "dependencies": {},
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
 }
+
 
 
   

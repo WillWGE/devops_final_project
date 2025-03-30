@@ -77,6 +77,8 @@ pipeline {
                     // Check if deployment exists
                     // Update the image in deployment
                     sh """
+                        kubectl apply -f k8s/deployment.yaml
+                        kubectl apply -f k8s/service.yaml
                         kubectl set image deployment/nodejs-app nodejs-app='williamwg/nodejs-app:latest' --namespace=default
                         
                     """

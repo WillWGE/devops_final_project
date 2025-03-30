@@ -1,10 +1,12 @@
 FROM node:18
 
-# Set the working directory in the container
+# Create app directory & set the working directory in the container
+RUN mkdir -p /usr/src/app
+
 WORKDIR /app
 
-# Copy package.json and package-lock.json (or yarn.lock) to the working directory
-COPY package*.json ./
+# Copy package.json  to the working directory
+COPY package.json /usr/src/app/
 
 # Install application dependencies
 RUN npm install
@@ -13,7 +15,7 @@ RUN npm install
 RUN npm install -g sequelize-cli
 
 # Copy the rest of the application code to the working directory
-COPY . .
+COPY . /usr/src/app
 
 # Expose the port that the application will run on
 EXPOSE 8000

@@ -3,7 +3,7 @@ FROM node:18
 # Create app directory & set the working directory in the container
 RUN mkdir -p /usr/src/app
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Copy package.json  to the working directory
 COPY package.json /usr/src/app/
